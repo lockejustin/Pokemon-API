@@ -1,0 +1,39 @@
+﻿@model Pokemon
+
+
+<table id="PokemonInfoTable" class="table table-bordered shadow table-hover table-info">
+    <tr  class="table table-bordered shadow table-hover table-info">
+        <th>Name</th>
+        <th>Types</th>
+        <th>Stats</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Sprite</th>
+    </tr>
+    <tr class="d-table-row">
+        <td>@Model.name</td>
+        <td>
+            @foreach (var t in Model.types)
+            {
+                <p>@t.type.name</p>
+            }
+        </td>
+        <td>
+            @foreach (var s in Model.stats)
+            {
+                <p>@s.stat.name: @s.base_stat</p>
+            }
+        </td>
+        <td>@Model.height</td>
+        <td>@Model.weight</td>
+        <td>
+            <p>Normal</p>
+            <img src=@Model.sprites.front_default />
+            <p>Shiny</p>
+            <img src=@Model.sprites.front_shiny />
+        </td>
+    </tr>
+</table>
+
+<a href="../Pokemon/AddPokemon?id=@Model.id">Add to Favorites</a>
+

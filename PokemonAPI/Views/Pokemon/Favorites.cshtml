@@ -1,0 +1,74 @@
+﻿@model List<FavoritePokemon>
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<h1>Favorite Pok&eacute;mon</h1>
+
+<table class="table table-bordered table-info shadow table-hover">
+    <tr>
+        <th class="text-center text-uppercase">Pok&eacute;mon</th>
+        <th class="text-center text-uppercase">Nickname</th>
+        <th class="text-center text-uppercase">Type</th>
+        <th class="text-center text-uppercase">Stats</th>
+        <th class="text-center text-uppercase">Height</th>
+        <th class="text-center text-uppercase">Weight</th>
+        <th class="text-center text-uppercase">Sprites</th>
+
+        <th class="text-center text-uppercase"></th>
+    </tr>
+
+    @foreach (FavoritePokemon p in Model)
+    {
+        <tr>
+            @*Capitalize Name*@
+                @{
+                    string nameUpper = "";
+                    nameUpper += p.Name[0].ToString().ToUpper();
+                    nameUpper += p.Name.Substring(1, p.Name.Length - 1);
+                }
+            <td class="align-middle text-center font-weight-bold">@nameUpper</td>
+            <td class="align-middle text-center font-weight-bold">@p.Nickname</td>
+            <td class="align-middle text-center font-weight-bold">
+                @{ 
+                    string[] typeArray = p.Type.Split(',');
+                    for (int i = 0; i < typeArray.Length; i++)
+                    {
+                        @typeArray[i];
+                        <br />
+                    }
+                }
+            </td>
+            <td class="align-middle font-weight-bold">
+                @{
+                    string[] statArray = p.Stats.Split(',');
+                    for (int i = 0; i < statArray.Length; i++)
+                    {
+                        @statArray[i];
+                        <br />
+                    }
+                }
+            </td>
+            <td class="align-middle text-center font-weight-bold">@p.Height</td>
+            <td class="align-middle text-center font-weight-bold">@p.Weight</td>
+
+            <td class="align-middle text-center font-weight-bold">
+                @{
+                    string[] spriteArray = p.Sprite.Split(',');
+                }
+
+                Default<br />
+                <img src="@spriteArray[0]" alt="@nameUpper" title="@nameUpper" /><br />
+                Shiny<br />
+                <img src="@spriteArray[1]" alt="Shiny @nameUpper" title="Shiny @nameUpper" />
+            </td>
+
+            <td class="align-middle text-center">
+                <a href="../Pokemon/DeletePokemon?id=@p.Id"><button class="btn-danger btn" onclick="confirmDelete()">Remove</button><br /><br /></a>
+                    <a href="../Pokemon/UpdatePokemon?id=@p.Id"><button class="btn-warning btn">Update</button></a>
+
+            </td>
+        </tr>
+    }
+</table>

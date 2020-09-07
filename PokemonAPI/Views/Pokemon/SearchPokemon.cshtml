@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Pokémon Search";
+}
+
+<h1 >Pokémon Search</h1>
+
+<form action="../Pokemon/SearchPokemonByName" method="post">
+    <input type="text" pattern="[a-zA-Z]+" required name="searchName" placeholder="Enter Pokémon Name (no special characters, numbers, or spaces)" class="form-control mb-4" />
+    <input type="submit" value="Search" class="form-control mb-4" />
+    <h1 style="color:darkred;text-align:center">@ViewBag.Message</h1>
+</form>
+<br />
+<form action="../Pokemon/SearchPokemonById" method="post">
+    <input type="number" required min="1" max="890" name="id" placeholder="Enter International Pokédex Number (1-890)" class="form-control mb-4" />
+    <input type="submit" value="Search" class="form-control mb-4" />
+</form>
